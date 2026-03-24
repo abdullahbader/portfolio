@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Windows system files
+NTUSER.DAT
+ntuser.dat.LOG1
+ntuser.dat.LOG2
+*.TM.blf
+*.TMContainer*.regtrans-ms
+ntuser.ini
+
+# User profile directories (not project files)
+AppData/
+.cache/
+.android/
+.gradle/
+.ssh/
+.cursor/
+.gemini/
+.ollama/
+.matplotlib/
+.streamlit/
+.antigravity/
+.surveycto-desktop/
+.claude.json
+.claude.json.backup
+.claude/
+.config/
