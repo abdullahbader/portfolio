@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Youth Study",
+    "desc": "Youth empowerment research dashboard by Queen Rania Foundation — tracking school visits, survey completions, and student demographics across Jordan.",
+    "longDesc": "A Power BI dashboard presenting findings from the Youth Agency Study conducted by the Queen Rania Foundation in partnership with the Center for Universal Education at Brookings. Covers 100 randomly selected schools across Jordan, tracking enumerator progress, school visits vs. targets, student demographics, and randomization breakdowns."
+  },
+  {
+    "id": 2,
+    "title": "Health Dashboard",
+    "desc": "First view of the HFC dashboard covering key operational indicators and performance tracking.",
+    "longDesc": "Page 1 of the HFC Power BI report. Provides an overview of core metrics and KPIs relevant to HFC operations, enabling stakeholders to monitor performance at a glance."
+  },
+  {
+    "id": 3,
+    "title": "Child Health Overview Dashboard",
+    "desc": "Second view of the HFC dashboard with deeper drill-down into operational and program metrics.",
+    "longDesc": "Page 2 of the HFC Power BI report. Offers a deeper breakdown of program-level data, trends, and supporting metrics to complement the executive overview on Page 1."
+  },
+  {
+    "id": 4,
+    "title": "Vaccination Dashboard",
+    "desc": "Tracking zero-dose children coverage, immunization gaps, and outreach program performance.",
+    "longDesc": "An interactive dashboard monitoring zero-dose children indicators — tracking immunization coverage gaps, geographic distribution, and outreach program effectiveness to support public health decision-making."
+  },
+  {
+    "id": 5,
+    "title": "Marketing Campaign Tracker",
+    "desc": "Multi-channel campaign performance: ROI, conversion rates, cost per lead, and channel attribution.",
+    "longDesc": "Integrated marketing analytics combining Google Ads, social media, email, and CRM data. Features channel attribution modeling, funnel conversion analysis, and campaign ROI scorecard."
+  },
+  {
+    "id": 6,
+    "title": "Executive Summary Report",
+    "desc": "One-page C-suite overview consolidating key metrics from Sales, Finance, Operations and HR.",
+    "longDesc": "A single-page board-level dashboard aggregating the top 12 KPIs across four business functions. Designed for weekly leadership reviews — auto-updates each Monday via scheduled refresh."
+  }
+]

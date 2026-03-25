@@ -922,20 +922,16 @@
 
 <!-- ──────────────── SCRIPTS ──────────────── -->
 <script>
-// ═══════════════════════════════════════════
-//  DASHBOARD DATA  ← Edit this array to add
-//  your real dashboards, screenshots & links
-// ═══════════════════════════════════════════
-const dashboards = [
+// ═══════════════════════════════════════════════════════════════
+//  DASHBOARD METADATA  ← Edit category, tags, embed URLs, etc.
+//  To edit titles & summaries, open dashboards.json instead.
+// ═══════════════════════════════════════════════════════════════
+const dashboardsMeta = [
   {
     id: 1,
-    title: "Youth Agency Study — QRF",
     category: "operations",
     categoryLabel: "Research & Education",
-    desc: "Youth empowerment research dashboard by Queen Rania Foundation — tracking school visits, survey completions, and student demographics across Jordan.",
-    longDesc: "A Power BI dashboard presenting findings from the Youth Agency Study conducted by the Queen Rania Foundation in partnership with the Center for Universal Education at Brookings. Covers 100 randomly selected schools across Jordan, tracking enumerator progress, school visits vs. targets, student demographics, and randomization breakdowns.",
     tags: ["Queen Rania Foundation", "Youth", "Education", "Jordan"],
-    image: "qrf-thumbnail.png",
     embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiM2I4MjE5MzItZjFlYi00MzM5LTk1NDUtYjAxODI1YmFlNzBjIiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
     icon: "📊",
     client: "Client",
@@ -944,13 +940,9 @@ const dashboards = [
   },
   {
     id: 2,
-    title: "HFC Dashboard — Page 1",
     category: "operations",
     categoryLabel: "Operations",
-    desc: "First view of the HFC dashboard covering key operational indicators and performance tracking.",
-    longDesc: "Page 1 of the HFC Power BI report. Provides an overview of core metrics and KPIs relevant to HFC operations, enabling stakeholders to monitor performance at a glance.",
     tags: ["HFC", "KPIs", "Operations", "Performance"],
-    image: null,
     embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNDk0YzZkMDMtZmNlNS00YTU3LTkwNDgtY2JjMGE2NjdiODU2IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9&pageName=bd446f17e701ae847ad3",
     icon: "🏥",
     client: "HFC Client",
@@ -959,13 +951,9 @@ const dashboards = [
   },
   {
     id: 3,
-    title: "HFC Dashboard — Page 2",
     category: "operations",
     categoryLabel: "Operations",
-    desc: "Second view of the HFC dashboard with deeper drill-down into operational and program metrics.",
-    longDesc: "Page 2 of the HFC Power BI report. Offers a deeper breakdown of program-level data, trends, and supporting metrics to complement the executive overview on Page 1.",
     tags: ["HFC", "Drill-down", "Trends", "Programs"],
-    image: null,
     embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNDk0YzZkMDMtZmNlNS00YTU3LTkwNDgtY2JjMGE2NjdiODU2IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9&pageName=db7ab6a7b59ba3a38a2e",
     icon: "🏥",
     client: "HFC Client",
@@ -974,13 +962,9 @@ const dashboards = [
   },
   {
     id: 4,
-    title: "Zero Dose Dashboard",
     category: "operations",
     categoryLabel: "Health & Program",
-    desc: "Tracking zero-dose children coverage, immunization gaps, and outreach program performance.",
-    longDesc: "An interactive dashboard monitoring zero-dose children indicators — tracking immunization coverage gaps, geographic distribution, and outreach program effectiveness to support public health decision-making.",
     tags: ["Zero Dose", "Immunization", "Coverage", "Public Health"],
-    image: null,
     embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiOTA1ZGM4NmMtMDkwZS00ZTU2LWEwM2QtMzBkMWNiY2JkYTM1IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9&pageName=cd2ed6b4e47938ae31a1",
     icon: "💉",
     client: "Health Sector",
@@ -989,13 +973,9 @@ const dashboards = [
   },
   {
     id: 5,
-    title: "Marketing Campaign Tracker",
     category: "sales",
     categoryLabel: "Sales & Marketing",
-    desc: "Multi-channel campaign performance: ROI, conversion rates, cost per lead, and channel attribution.",
-    longDesc: "Integrated marketing analytics combining Google Ads, social media, email, and CRM data. Features channel attribution modeling, funnel conversion analysis, and campaign ROI scorecard.",
     tags: ["ROI", "Conversion", "Attribution", "Campaigns"],
-    image: null,
     embedUrl: null,
     icon: "📣",
     client: "E-commerce Client",
@@ -1004,13 +984,9 @@ const dashboards = [
   },
   {
     id: 6,
-    title: "Executive Summary Report",
     category: "finance",
     categoryLabel: "Finance",
-    desc: "One-page C-suite overview consolidating key metrics from Sales, Finance, Operations and HR.",
-    longDesc: "A single-page board-level dashboard aggregating the top 12 KPIs across four business functions. Designed for weekly leadership reviews — auto-updates each Monday via scheduled refresh.",
     tags: ["C-Suite", "KPIs", "Consolidated", "Weekly"],
-    image: null,
     embedUrl: null,
     icon: "🏆",
     client: "Multi-Industry",
@@ -1018,6 +994,9 @@ const dashboards = [
     tools: "Power BI, DAX, Composite Model"
   }
 ];
+
+// Merged dashboard array — populated after loading dashboards.json
+let dashboards = [];
 
 // ═══════════════════════════════════════════════════════
 //  COUNTERS in hero  ← Set your real numbers here
@@ -1233,11 +1212,33 @@ document.getElementById('contactForm').addEventListener('submit', async e => {
   btn.textContent = 'Send Message →'; btn.disabled = false;
 });
 
-// ──────────────────────────────────────────
-//  Init
-// ──────────────────────────────────────────
-renderCards();
-observeFade();
+// ──────────────────────────────────────────────────────────────
+//  Init — load titles & summaries from dashboards.json, then render
+// ──────────────────────────────────────────────────────────────
+fetch('dashboards.json')
+  .then(r => r.json())
+  .then(textData => {
+    dashboards = dashboardsMeta.map(meta => {
+      const t = textData.find(d => d.id === meta.id) || {};
+      return {
+        ...meta,
+        title:    t.title    || '',
+        desc:     t.desc     || '',
+        longDesc: t.longDesc || '',
+        image:    `images/${t.title}.png`
+      };
+    });
+    renderCards();
+    observeFade();
+  })
+  .catch(() => {
+    // Fallback: render without text data if JSON fails to load
+    dashboards = dashboardsMeta.map(meta => ({
+      ...meta, title: '', desc: '', longDesc: '', image: null
+    }));
+    renderCards();
+    observeFade();
+  });
 </script>
 
 </body>
