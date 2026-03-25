@@ -9,15 +9,15 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:        #0d0f14;
-      --bg2:       #13161e;
-      --bg3:       #1a1e2a;
-      --accent:    #f2c94c;
-      --accent2:   #f27c30;
-      --text:      #e8eaf0;
-      --muted:     #7b8099;
-      --border:    #252a38;
-      --card:      #181c28;
+      --bg:        #0e0e0e;
+      --bg2:       #161616;
+      --bg3:       #1E1E1E;
+      --accent:    #14A800;
+      --accent2:   #9BDD7C;
+      --text:      #FFFFFF;
+      --muted:     #a0a8a0;
+      --border:    #2a2a2a;
+      --card:      #1E1E1E;
       --radius:    12px;
       --font:      'Segoe UI', system-ui, -apple-system, sans-serif;
     }
@@ -47,7 +47,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 6%; height: 64px;
-      background: rgba(13,15,20,0.85);
+      background: rgba(14,14,14,0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       transition: box-shadow .3s;
@@ -69,11 +69,11 @@
     .nav-links a:hover { color: var(--accent); text-decoration: none; }
 
     .nav-cta {
-      background: var(--accent); color: #0d0f14 !important;
+      background: var(--accent); color: #001E00 !important;
       padding: .4rem 1.1rem; border-radius: 6px; font-weight: 600 !important;
       transition: opacity .2s !important;
     }
-    .nav-cta:hover { opacity: .85; color: #0d0f14 !important; }
+    .nav-cta:hover { opacity: .85; color: #001E00 !important; }
 
     .hamburger {
       display: none; flex-direction: column; gap: 5px;
@@ -97,16 +97,16 @@
     .hero-bg {
       position: absolute; inset: 0; z-index: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 70% 50%, rgba(242,201,76,.08) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(242,124,48,.06) 0%, transparent 60%);
+        radial-gradient(ellipse 60% 50% at 70% 50%, rgba(20,168,0,.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(155,221,124,.06) 0%, transparent 60%);
     }
 
     /* animated grid */
     .hero-grid {
       position: absolute; inset: 0; z-index: 0;
       background-image:
-        linear-gradient(rgba(242,201,76,.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(242,201,76,.04) 1px, transparent 1px);
+        linear-gradient(rgba(20,168,0,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20,168,0,.04) 1px, transparent 1px);
       background-size: 50px 50px;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
     }
@@ -121,7 +121,7 @@
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: .5rem;
-      background: rgba(242,201,76,.1); border: 1px solid rgba(242,201,76,.25);
+      background: rgba(20,168,0,.1); border: 1px solid rgba(20,168,0,.25);
       color: var(--accent); font-size: .8rem; font-weight: 600;
       padding: .35rem .9rem; border-radius: 20px; margin-bottom: 1.2rem;
       letter-spacing: .5px; text-transform: uppercase;
@@ -157,9 +157,9 @@
     }
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #0d0f14;
+      color: #001E00;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(242,201,76,.35); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(20,168,0,.35); }
 
     .btn-secondary {
       background: transparent; color: var(--text);
@@ -186,7 +186,7 @@
       border-radius: 50%;
       padding: 4px;
       background: linear-gradient(135deg, var(--accent), var(--accent2), transparent, var(--accent));
-      animation: spin-ring 8s linear infinite;
+      animation: none;
     }
     @keyframes spin-ring { to { transform: rotate(360deg); } }
 
@@ -260,7 +260,7 @@
       content: ''; position: absolute; left: 0; top: 0; bottom: 0;
       width: 3px; background: linear-gradient(180deg, var(--accent), var(--accent2));
     }
-    .exp-item:hover { border-color: rgba(242,201,76,.35); }
+    .exp-item:hover { border-color: rgba(20,168,0,.35); }
 
     .exp-title { font-weight: 700; font-size: .97rem; }
     .exp-company { color: var(--accent); font-size: .88rem; font-weight: 500; }
@@ -280,7 +280,7 @@
       cursor: pointer; transition: all .2s;
     }
     .filter-btn.active, .filter-btn:hover {
-      background: rgba(242,201,76,.12);
+      background: rgba(20,168,0,.12);
       border-color: var(--accent); color: var(--accent);
     }
 
@@ -298,7 +298,7 @@
     }
     .dashboard-card:hover {
       transform: translateY(-5px);
-      border-color: rgba(242,201,76,.4);
+      border-color: rgba(20,168,0,.4);
       box-shadow: 0 15px 40px rgba(0,0,0,.4);
     }
 
@@ -315,6 +315,31 @@
     }
     .dashboard-card:hover .card-thumb img { transform: scale(1.05); }
 
+    /* Live iframe thumbnail */
+    .card-thumb .thumb-iframe-wrap {
+      position: absolute; inset: 0;
+      overflow: hidden; pointer-events: none;
+    }
+    .card-thumb .thumb-iframe-wrap iframe {
+      width: 200%; height: 200%;
+      transform: scale(0.5);
+      transform-origin: top left;
+      border: none;
+      transition: transform .4s;
+    }
+    .dashboard-card:hover .thumb-iframe-wrap iframe {
+      transform: scale(0.52);
+    }
+
+    /* Loading shimmer shown while iframe loads */
+    .thumb-shimmer {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, var(--bg3) 25%, var(--bg2) 50%, var(--bg3) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+
     .thumb-placeholder {
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
@@ -323,8 +348,8 @@
     }
     .thumb-icon {
       width: 60px; height: 60px; border-radius: 12px;
-      background: rgba(242,201,76,.12);
-      border: 1px solid rgba(242,201,76,.2);
+      background: rgba(20,168,0,.12);
+      border: 1px solid rgba(20,168,0,.2);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.6rem;
     }
@@ -343,7 +368,7 @@
     .dashboard-card:hover .card-overlay { opacity: 1; }
 
     .overlay-btn {
-      background: var(--accent); color: #0d0f14;
+      background: var(--accent); color: #001E00;
       padding: .5rem 1.1rem; border-radius: 6px;
       font-size: .83rem; font-weight: 700;
       border: none; cursor: pointer; transition: transform .15s;
@@ -372,26 +397,31 @@
     /* ── MODAL ── */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,.85); backdrop-filter: blur(6px);
+      background: rgba(0,0,0,.92); backdrop-filter: blur(8px);
       display: flex; align-items: center; justify-content: center;
-      padding: 1.5rem;
+      padding: 1rem;
       opacity: 0; pointer-events: none; transition: opacity .25s;
     }
     .modal-overlay.open { opacity: 1; pointer-events: all; }
 
     .modal {
       background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; max-width: 860px; width: 100%;
-      max-height: 90vh; overflow-y: auto;
+      border-radius: 16px;
+      width: min(1200px, 96vw);
+      max-height: 95vh; overflow-y: auto;
       transform: scale(.95) translateY(20px);
       transition: transform .25s;
+      display: flex; flex-direction: column;
     }
     .modal-overlay.open .modal { transform: scale(1) translateY(0); }
 
     .modal-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.5rem 1.75rem; border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
     }
+    .modal-header-actions { display: flex; align-items: center; gap: .6rem; }
+
     .modal-close {
       background: var(--bg3); border: 1px solid var(--border);
       color: var(--text); width: 34px; height: 34px;
@@ -399,15 +429,45 @@
       display: flex; align-items: center; justify-content: center;
       transition: all .2s;
     }
-    .modal-close:hover { background: var(--accent); color: #0d0f14; border-color: var(--accent); }
+    .modal-close:hover { background: #e55; color: #fff; border-color: #e55; }
 
-    .modal-body { padding: 1.75rem; }
+    .modal-fullscreen-btn {
+      background: rgba(20,168,0,.12); border: 1px solid rgba(20,168,0,.3);
+      color: var(--accent); padding: .35rem .9rem;
+      border-radius: 6px; font-size: .8rem; font-weight: 600;
+      cursor: pointer; transition: all .2s; text-decoration: none;
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .modal-fullscreen-btn:hover { background: var(--accent); color: #001E00; text-decoration: none; }
+
+    .modal-present-btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #001E00; padding: .35rem .9rem;
+      border-radius: 6px; font-size: .8rem; font-weight: 700;
+      cursor: pointer; border: none; transition: all .2s;
+      display: flex; align-items: center; gap: .4rem;
+    }
+    .modal-present-btn:hover { opacity: .85; transform: scale(1.03); }
+
+    /* When the iframe goes fullscreen, fill the entire screen */
+    .modal-preview iframe:fullscreen,
+    .modal-preview iframe:-webkit-full-screen,
+    .modal-preview iframe:-moz-full-screen {
+      width: 100vw !important;
+      height: 100vh !important;
+      border: none !important;
+      background: #000;
+    }
+
+    .modal-body { padding: 1.25rem 1.5rem; }
 
     .modal-preview {
-      width: 100%; aspect-ratio: 16/9;
+      width: 100%;
+      height: clamp(400px, 62vh, 700px);
       background: var(--bg3); border-radius: 10px;
-      overflow: hidden; margin-bottom: 1.5rem;
+      overflow: hidden; margin-bottom: 1.25rem;
       display: flex; align-items: center; justify-content: center;
+      position: relative;
     }
     .modal-preview img { width: 100%; height: 100%; object-fit: cover; }
     .modal-preview iframe { width: 100%; height: 100%; border: none; }
@@ -445,14 +505,14 @@
       transition: all .25s;
     }
     .service-card:hover {
-      border-color: rgba(242,201,76,.35);
+      border-color: rgba(20,168,0,.35);
       transform: translateY(-3px);
       box-shadow: 0 10px 30px rgba(0,0,0,.3);
     }
     .service-icon {
       font-size: 2rem; margin-bottom: 1rem;
       width: 52px; height: 52px;
-      background: rgba(242,201,76,.1);
+      background: rgba(20,168,0,.1);
       border-radius: 10px; display: flex;
       align-items: center; justify-content: center;
     }
@@ -480,7 +540,7 @@
 
     .contact-link-icon {
       font-size: 1.2rem; width: 38px; height: 38px;
-      background: rgba(242,201,76,.1); border-radius: 8px;
+      background: rgba(20,168,0,.1); border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
@@ -513,11 +573,11 @@
 
     .submit-btn {
       background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #0d0f14; border: none; padding: .85rem;
+      color: #001E00; border: none; padding: .85rem;
       border-radius: 8px; font-size: .95rem; font-weight: 700;
       cursor: pointer; transition: all .2s;
     }
-    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(242,201,76,.3); }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(20,168,0,.3); }
 
     .form-success {
       display: none; background: rgba(34,197,94,.1);
@@ -667,39 +727,16 @@
       <div class="skills-list">
         <span class="skill-tag">Power BI</span>
         <span class="skill-tag">DAX</span>
-        <span class="skill-tag">Power Query</span>
+        <span class="skill-tag">Data Cleaning</span>
+        <span class="skill-tag">Data Analysis</span>
+        <span class="skill-tag">Survey Design</span>
+        <span class="skill-tag">ODK</span>
+        <span class="skill-tag">SurveyCTO</span>
+        <span class="skill-tag">SPSS</span>
         <span class="skill-tag">SQL</span>
-        <span class="skill-tag">Excel</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">Azure</span>
-        <span class="skill-tag">Data Modeling</span>
-        <span class="skill-tag">ETL</span>
-        <span class="skill-tag">KPI Design</span>
-        <span class="skill-tag">Storytelling</span>
       </div>
     </div>
 
-    <div class="experience-list fade-in" style="transition-delay:.15s">
-      <!-- ✏️ Edit these experience items to match your real background -->
-      <div class="exp-item">
-        <div class="exp-title">Senior BI Developer</div>
-        <div class="exp-company">Company Name</div>
-        <div class="exp-period">2022 – Present</div>
-        <div class="exp-desc">Built enterprise Power BI dashboards serving 200+ users across Finance and Operations departments.</div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-title">Data Analyst</div>
-        <div class="exp-company">Company Name</div>
-        <div class="exp-period">2019 – 2022</div>
-        <div class="exp-desc">Designed automated reporting pipelines and KPI frameworks that reduced manual reporting by 70%.</div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-title">Business Intelligence Intern</div>
-        <div class="exp-company">Company Name</div>
-        <div class="exp-period">2018 – 2019</div>
-        <div class="exp-desc">Supported data warehouse development and created departmental dashboards using Power BI and SQL.</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -733,33 +770,38 @@
   <div class="services-grid">
     <div class="service-card fade-in">
       <div class="service-icon">📊</div>
-      <div class="service-title">Dashboard Design</div>
-      <div class="service-desc">Interactive Power BI dashboards with clean UX, custom visuals, and executive-ready layouts.</div>
+      <div class="service-title">Power BI Dashboards</div>
+      <div class="service-desc">Interactive Power BI dashboards with clean visuals, DAX measures, and executive-ready layouts.</div>
     </div>
     <div class="service-card fade-in">
-      <div class="service-icon">🗄️</div>
-      <div class="service-title">Data Modeling</div>
-      <div class="service-desc">Star schema design, relationships, and optimized DAX measures for high-performance reports.</div>
-    </div>
-    <div class="service-card fade-in">
-      <div class="service-icon">⚙️</div>
-      <div class="service-title">ETL & Power Query</div>
-      <div class="service-desc">Automated data pipelines connecting ERP, CRM, databases, APIs, and flat files.</div>
+      <div class="service-icon">🧹</div>
+      <div class="service-title">Data Cleaning</div>
+      <div class="service-desc">Transforming raw, messy datasets into structured, reliable data ready for analysis and reporting.</div>
     </div>
     <div class="service-card fade-in">
       <div class="service-icon">📈</div>
-      <div class="service-title">KPI Frameworks</div>
-      <div class="service-desc">Define, calculate, and visualize the metrics that matter most to your leadership team.</div>
+      <div class="service-title">Data Analysis</div>
+      <div class="service-desc">Uncovering patterns, trends, and insights from data to support informed decision-making.</div>
     </div>
     <div class="service-card fade-in">
-      <div class="service-icon">🔍</div>
-      <div class="service-title">Report Audit & Optimization</div>
-      <div class="service-desc">Review existing reports for performance issues, visual clarity, and DAX efficiency.</div>
+      <div class="service-icon">📋</div>
+      <div class="service-title">Survey Design</div>
+      <div class="service-desc">Designing and deploying surveys using ODK and SurveyCTO for field data collection and research projects.</div>
     </div>
     <div class="service-card fade-in">
-      <div class="service-icon">🎓</div>
-      <div class="service-title">Training & Workshops</div>
-      <div class="service-desc">Hands-on Power BI training for teams — from beginner navigation to advanced DAX.</div>
+      <div class="service-icon">🔢</div>
+      <div class="service-title">DAX Development</div>
+      <div class="service-desc">Writing optimized DAX measures and calculated columns for accurate, high-performance Power BI reports.</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">📉</div>
+      <div class="service-title">Statistical Analysis (SPSS)</div>
+      <div class="service-desc">Running descriptive and inferential statistical analyses using SPSS for research and program evaluation.</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-icon">🗃️</div>
+      <div class="service-title">SQL</div>
+      <div class="service-desc">Querying and managing relational databases to extract, filter, and prepare data for analysis and reporting.</div>
     </div>
   </div>
 </section>
@@ -778,25 +820,25 @@
 
       <div class="contact-links">
         <!-- ✏️ Replace with your real contact info -->
-        <a href="mailto:your@email.com" class="contact-link">
+        <a href="mailto:abdallah.b.b96@gmail.com" class="contact-link">
           <div class="contact-link-icon">✉️</div>
           <div>
             <div class="contact-link-text">Email</div>
-            <div class="contact-link-sub">your@email.com</div>
+            <div class="contact-link-sub">abdallah.b.b96@gmail.com</div>
           </div>
         </a>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" class="contact-link">
+        <a href="https://www.linkedin.com/in/abdullah-bader-356676111" target="_blank" rel="noopener" class="contact-link">
           <div class="contact-link-icon">💼</div>
           <div>
             <div class="contact-link-text">LinkedIn</div>
-            <div class="contact-link-sub">linkedin.com/in/yourprofile</div>
+            <div class="contact-link-sub">linkedin.com/in/abdullah-bader-356676111</div>
           </div>
         </a>
-        <a href="tel:+000000000000" class="contact-link">
+        <a href="tel:+962797090509" class="contact-link">
           <div class="contact-link-icon">📱</div>
           <div>
             <div class="contact-link-text">Phone / WhatsApp</div>
-            <div class="contact-link-sub">+000 000 000 000</div>
+            <div class="contact-link-sub">+962 79 709 0509</div>
           </div>
         </a>
       </div>
@@ -807,20 +849,20 @@
         <div class="form-row">
           <div class="form-group">
             <label for="fname">First Name</label>
-            <input type="text" id="fname" placeholder="John" required />
+            <input type="text" id="fname" name="first_name" placeholder="John" required />
           </div>
           <div class="form-group">
             <label for="lname">Last Name</label>
-            <input type="text" id="lname" placeholder="Doe" required />
+            <input type="text" id="lname" name="last_name" placeholder="Doe" required />
           </div>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="john@company.com" required />
+          <input type="email" id="email" name="email" placeholder="john@company.com" required />
         </div>
         <div class="form-group">
           <label for="service">Service Needed</label>
-          <select id="service">
+          <select id="service" name="service">
             <option value="">Select a service…</option>
             <option>Dashboard Design</option>
             <option>Data Modeling</option>
@@ -833,7 +875,7 @@
         </div>
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" rows="4" placeholder="Tell me about your project…" required></textarea>
+          <textarea id="message" name="message" rows="4" placeholder="Tell me about your project…" required></textarea>
         </div>
         <button type="submit" class="submit-btn">Send Message →</button>
         <div class="form-success" id="formSuccess">
@@ -859,7 +901,15 @@
         <div class="card-category" id="modalCategory"></div>
         <h3 id="modalTitle"></h3>
       </div>
-      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-header-actions">
+        <button id="modalPresentBtn" class="modal-present-btn" title="Present fullscreen">
+          ⛶ Present
+        </button>
+        <a id="modalOpenBtn" href="#" target="_blank" rel="noopener" class="modal-fullscreen-btn">
+          ↗ Open in Power BI
+        </a>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
     </div>
     <div class="modal-body">
       <div class="modal-preview" id="modalPreview"></div>
@@ -879,13 +929,13 @@
 const dashboards = [
   {
     id: 1,
-    title: "QRF Progress",
+    title: "Youth Agency Study — QRF",
     category: "operations",
-    categoryLabel: "Operations",
-    desc: "Progress tracking dashboard monitoring QRF milestones, completion rates, and key performance indicators.",
-    longDesc: "A live Power BI dashboard tracking QRF (Quick Response Force) progress metrics. Provides real-time visibility into milestones, completion status, and operational KPIs to support timely decision-making.",
-    tags: ["Progress", "KPIs", "Tracking", "Operations"],
-    image: null,
+    categoryLabel: "Research & Education",
+    desc: "Youth empowerment research dashboard by Queen Rania Foundation — tracking school visits, survey completions, and student demographics across Jordan.",
+    longDesc: "A Power BI dashboard presenting findings from the Youth Agency Study conducted by the Queen Rania Foundation in partnership with the Center for Universal Education at Brookings. Covers 100 randomly selected schools across Jordan, tracking enumerator progress, school visits vs. targets, student demographics, and randomization breakdowns.",
+    tags: ["Queen Rania Foundation", "Youth", "Education", "Jordan"],
+    image: "qrf-thumbnail.png",
     embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiM2I4MjE5MzItZjFlYi00MzM5LTk1NDUtYjAxODI1YmFlNzBjIiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
     icon: "📊",
     client: "Client",
@@ -894,48 +944,48 @@ const dashboards = [
   },
   {
     id: 2,
-    title: "Financial Reporting Suite",
-    category: "finance",
-    categoryLabel: "Finance",
-    desc: "P&L statements, cash flow tracking, budget vs actuals, and variance analysis for executive reporting.",
-    longDesc: "A multi-page financial reporting suite replacing manual Excel reports. Includes income statement, balance sheet summary, cash flow waterfall, and department-level budget tracking with drill-through capabilities.",
-    tags: ["P&L", "Budget vs Actual", "Cash Flow", "Variance"],
+    title: "HFC Dashboard — Page 1",
+    category: "operations",
+    categoryLabel: "Operations",
+    desc: "First view of the HFC dashboard covering key operational indicators and performance tracking.",
+    longDesc: "Page 1 of the HFC Power BI report. Provides an overview of core metrics and KPIs relevant to HFC operations, enabling stakeholders to monitor performance at a glance.",
+    tags: ["HFC", "KPIs", "Operations", "Performance"],
     image: null,
-    embedUrl: null,
-    icon: "💰",
-    client: "Finance Sector",
-    year: "2024",
-    tools: "Power BI, Power Query, DAX"
+    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNDk0YzZkMDMtZmNlNS00YTU3LTkwNDgtY2JjMGE2NjdiODU2IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9&pageName=bd446f17e701ae847ad3",
+    icon: "🏥",
+    client: "HFC Client",
+    year: "2025",
+    tools: "Power BI, DAX"
   },
   {
     id: 3,
-    title: "Operations KPI Monitor",
+    title: "HFC Dashboard — Page 2",
     category: "operations",
     categoryLabel: "Operations",
-    desc: "Real-time operational KPIs including production output, downtime analysis, and supply chain metrics.",
-    longDesc: "Live operational dashboard refreshing every 15 minutes via DirectQuery. Tracks OEE, cycle times, downtime root causes, and supplier delivery performance. Alert thresholds highlight KPIs in red/amber/green automatically.",
-    tags: ["OEE", "Downtime", "KPIs", "Supply Chain", "Real-time"],
+    desc: "Second view of the HFC dashboard with deeper drill-down into operational and program metrics.",
+    longDesc: "Page 2 of the HFC Power BI report. Offers a deeper breakdown of program-level data, trends, and supporting metrics to complement the executive overview on Page 1.",
+    tags: ["HFC", "Drill-down", "Trends", "Programs"],
     image: null,
-    embedUrl: null,
-    icon: "⚙️",
-    client: "Manufacturing Client",
-    year: "2023",
-    tools: "Power BI, DirectQuery, SQL"
+    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNDk0YzZkMDMtZmNlNS00YTU3LTkwNDgtY2JjMGE2NjdiODU2IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9&pageName=db7ab6a7b59ba3a38a2e",
+    icon: "🏥",
+    client: "HFC Client",
+    year: "2025",
+    tools: "Power BI, DAX"
   },
   {
     id: 4,
-    title: "HR Analytics Dashboard",
-    category: "hr",
-    categoryLabel: "HR",
-    desc: "Headcount, attrition, recruitment funnel, and employee engagement analytics for HR teams.",
-    longDesc: "HR leadership dashboard covering headcount trends, voluntary/involuntary attrition, time-to-hire, and engagement survey results. Includes demographic breakdowns with confidentiality-compliant role-based access.",
-    tags: ["Headcount", "Attrition", "Recruitment", "Engagement"],
+    title: "Zero Dose Dashboard",
+    category: "operations",
+    categoryLabel: "Health & Program",
+    desc: "Tracking zero-dose children coverage, immunization gaps, and outreach program performance.",
+    longDesc: "An interactive dashboard monitoring zero-dose children indicators — tracking immunization coverage gaps, geographic distribution, and outreach program effectiveness to support public health decision-making.",
+    tags: ["Zero Dose", "Immunization", "Coverage", "Public Health"],
     image: null,
-    embedUrl: null,
-    icon: "👥",
-    client: "Telecom Client",
-    year: "2023",
-    tools: "Power BI, RLS, DAX"
+    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiOTA1ZGM4NmMtMDkwZS00ZTU2LWEwM2QtMzBkMWNiY2JkYTM1IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9&pageName=cd2ed6b4e47938ae31a1",
+    icon: "💉",
+    client: "Health Sector",
+    year: "2025",
+    tools: "Power BI, DAX, Power Query"
   },
   {
     id: 5,
@@ -990,13 +1040,21 @@ function renderCards(filter = 'all') {
       <div class="card-thumb">
         ${d.image
           ? `<img src="${d.image}" alt="${d.title}" loading="lazy" />`
-          : `<div class="thumb-placeholder">
-               <div class="thumb-icon">${d.icon}</div>
-               <div class="thumb-label">Power BI Dashboard</div>
-             </div>`
+          : d.embedUrl
+            ? `<div class="thumb-shimmer"></div>
+               <div class="thumb-iframe-wrap">
+                 <iframe src="${d.embedUrl}" scrolling="no" loading="lazy"
+                   title="${d.title} preview"
+                   onload="this.closest('.card-thumb').querySelector('.thumb-shimmer').style.display='none'">
+                 </iframe>
+               </div>`
+            : `<div class="thumb-placeholder">
+                 <div class="thumb-icon">${d.icon}</div>
+                 <div class="thumb-label">Power BI Dashboard</div>
+               </div>`
         }
         <div class="card-overlay">
-          <button class="overlay-btn">View Details</button>
+          <button class="overlay-btn">View Dashboard</button>
         </div>
       </div>
       <div class="card-body">
@@ -1025,10 +1083,32 @@ function openModal(id) {
   document.getElementById('modalTitle').textContent = d.title;
   document.getElementById('modalDesc').textContent = d.longDesc;
 
+  // Open in Power BI button
+  const openBtn = document.getElementById('modalOpenBtn');
+  const presentBtn = document.getElementById('modalPresentBtn');
+  if (d.embedUrl) {
+    openBtn.href = d.embedUrl;
+    openBtn.style.display = 'flex';
+    presentBtn.style.display = 'flex';
+  } else {
+    openBtn.style.display = 'none';
+    presentBtn.style.display = 'none';
+  }
+
+  // Present button → request fullscreen on the iframe
+  presentBtn.onclick = () => {
+    const iframe = document.querySelector('#modalPreview iframe');
+    if (!iframe) return;
+    const req = iframe.requestFullscreen || iframe.webkitRequestFullscreen || iframe.mozRequestFullScreen;
+    if (req) req.call(iframe);
+  };
+
   // Preview: iframe embed OR image OR placeholder
+  // Append &chromeless=1 to hide Power BI's own toolbar inside the embed
   const preview = document.getElementById('modalPreview');
   if (d.embedUrl) {
-    preview.innerHTML = `<iframe src="${d.embedUrl}" allowfullscreen title="${d.title}"></iframe>`;
+    const src = d.embedUrl + (d.embedUrl.includes('?') ? '&' : '?') + 'chromeless=1';
+    preview.innerHTML = `<iframe src="${src}" allowfullscreen title="${d.title}"></iframe>`;
   } else if (d.image) {
     preview.innerHTML = `<img src="${d.image}" alt="${d.title}" />`;
   } else {
@@ -1127,16 +1207,30 @@ document.getElementById('hamburger').addEventListener('click', () => {
 // ──────────────────────────────────────────
 //  Contact form (demo only — wire to backend)
 // ──────────────────────────────────────────
-document.getElementById('contactForm').addEventListener('submit', e => {
+document.getElementById('contactForm').addEventListener('submit', async e => {
   e.preventDefault();
   const btn = e.target.querySelector('.submit-btn');
   btn.textContent = 'Sending…'; btn.disabled = true;
-  setTimeout(() => {
-    document.getElementById('formSuccess').style.display = 'block';
-    e.target.reset();
-    btn.textContent = 'Send Message →'; btn.disabled = false;
-    setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; }, 5000);
-  }, 900);
+
+  const data = new FormData(e.target);
+  try {
+    const res = await fetch('https://formspree.io/f/mjgpbkap', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('formSuccess').style.display = 'block';
+      e.target.reset();
+      setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; }, 5000);
+    } else {
+      alert('Something went wrong. Please email me directly at abdallah.b.b96@gmail.com');
+    }
+  } catch {
+    alert('Network error. Please email me directly at abdallah.b.b96@gmail.com');
+  }
+
+  btn.textContent = 'Send Message →'; btn.disabled = false;
 });
 
 // ──────────────────────────────────────────
