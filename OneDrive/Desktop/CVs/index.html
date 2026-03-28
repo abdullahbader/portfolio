@@ -248,6 +248,35 @@
     }
     .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
 
+    /* ── TOOLS BAR ── */
+    .tools-bar {
+      display: flex; flex-wrap: wrap; gap: 1.2rem;
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .tool-item {
+      display: flex; flex-direction: column; align-items: center; gap: .45rem;
+      min-width: 52px;
+    }
+    .tool-icon {
+      width: 44px; height: 44px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s, transform .2s;
+    }
+    .tool-icon img { width: 24px; height: 24px; object-fit: contain; }
+    .tool-icon.text-icon {
+      font-size: .62rem; font-weight: 700; letter-spacing: .03em;
+      color: var(--text); text-align: center; line-height: 1.2;
+    }
+    .tool-item:hover .tool-icon {
+      border-color: var(--accent); transform: translateY(-2px);
+    }
+    .tool-name {
+      font-size: .7rem; color: var(--muted); text-align: center; white-space: nowrap;
+    }
+
     .experience-list { display: flex; flex-direction: column; gap: 1.5rem; }
 
     .exp-item {
@@ -310,35 +339,54 @@
     }
 
     .card-thumb img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%; height: 100%; object-fit: contain;
       transition: transform .4s;
     }
     .dashboard-card:hover .card-thumb img { transform: scale(1.05); }
 
-    /* Live iframe thumbnail */
+    .privacy-notice {
+      background: rgba(20,168,0,.07);
+      border: 1px solid rgba(20,168,0,.25);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: .9rem 1.25rem;
+      font-size: .88rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .privacy-notice strong { color: var(--text); }
+
+    /* Live iframe in card */
     .card-thumb .thumb-iframe-wrap {
       position: absolute; inset: 0;
       overflow: hidden; pointer-events: none;
     }
     .card-thumb .thumb-iframe-wrap iframe {
-      width: 200%; height: 200%;
-      transform: scale(0.5);
       transform-origin: top left;
       border: none;
-      transition: transform .4s;
-    }
-    .dashboard-card:hover .thumb-iframe-wrap iframe {
-      transform: scale(0.52);
+      pointer-events: none;
+      /* width, height & transform set by scaleThumbIframes() */
     }
 
-    /* Loading shimmer shown while iframe loads */
-    .thumb-shimmer {
-      position: absolute; inset: 0;
-      background: linear-gradient(90deg, var(--bg3) 25%, var(--bg2) 50%, var(--bg3) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
+    /* Live badge on cards with embed URL */
+    .live-badge {
+      position: absolute; top: .65rem; left: .65rem; z-index: 2;
+      background: rgba(20,168,0,.18); border: 1px solid rgba(20,168,0,.45);
+      color: var(--accent); font-size: .68rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: .25rem .55rem; border-radius: 20px;
+      display: flex; align-items: center; gap: .3rem;
     }
-    @keyframes shimmer { to { background-position: -200% 0; } }
+    .live-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .4; transform: scale(.7); }
+    }
 
     .thumb-placeholder {
       display: flex; flex-direction: column;
@@ -392,6 +440,38 @@
       background: var(--bg3); border: 1px solid var(--border);
       color: var(--muted); font-size: .73rem;
       padding: .2rem .65rem; border-radius: 10px;
+    }
+
+    /* ── PRESENTATION OVERLAY ── */
+    .present-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      background: #000;
+      display: none;
+      overflow-y: auto; overflow-x: hidden;
+    }
+    .present-overlay.open { display: block; }
+
+    .present-close {
+      position: fixed; top: 1rem; right: 1rem; z-index: 310;
+      background: rgba(0,0,0,.75); color: #fff;
+      border: 1px solid rgba(255,255,255,.25);
+      padding: .45rem 1rem; border-radius: 8px;
+      font-size: .85rem; font-weight: 600; cursor: pointer;
+      display: flex; align-items: center; gap: .4rem;
+      transition: background .2s;
+      backdrop-filter: blur(6px);
+    }
+    .present-close:hover { background: rgba(220,50,50,.85); border-color: #e55; }
+
+    .present-title {
+      position: fixed; top: 1rem; left: 1rem; z-index: 310;
+      background: rgba(0,0,0,.75); color: #fff;
+      border: 1px solid rgba(255,255,255,.12);
+      padding: .45rem 1rem; border-radius: 8px;
+      font-size: .85rem; font-weight: 600;
+      backdrop-filter: blur(6px);
+      max-width: 50vw; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
     }
 
     /* ── MODAL ── */
@@ -463,10 +543,11 @@
 
     .modal-preview {
       width: 100%;
-      height: clamp(400px, 62vh, 700px);
+      height: clamp(400px, 62vh, 700px); /* fallback; overridden by JS for canvas-sized iframes */
       background: var(--bg3); border-radius: 10px;
-      overflow: hidden; margin-bottom: 1.25rem;
-      display: flex; align-items: center; justify-content: center;
+      overflow-y: auto; overflow-x: hidden;
+      margin-bottom: 1.25rem;
+      display: flex; align-items: flex-start; justify-content: flex-start;
       position: relative;
     }
     .modal-preview img { width: 100%; height: 100%; object-fit: cover; }
@@ -735,6 +816,78 @@
         <span class="skill-tag">SPSS</span>
         <span class="skill-tag">SQL</span>
       </div>
+
+      <!-- Tools bar -->
+      <div class="tools-bar">
+        <!-- Power BI -->
+        <div class="tool-item">
+          <div class="tool-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="10" width="4" height="12" rx="1" fill="#F2C811"/>
+              <rect x="8" y="6" width="4" height="16" rx="1" fill="#F2C811" opacity=".8"/>
+              <rect x="14" y="2" width="4" height="20" rx="1" fill="#F2C811" opacity=".6"/>
+              <rect x="20" y="14" width="2" height="8" rx="1" fill="#F2C811" opacity=".4"/>
+            </svg>
+          </div>
+          <span class="tool-name">Power BI</span>
+        </div>
+        <!-- Tableau -->
+        <div class="tool-item">
+          <div class="tool-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <rect x="11" y="2" width="2" height="8" rx="1" fill="#E97627"/>
+              <rect x="11" y="14" width="2" height="8" rx="1" fill="#E97627"/>
+              <rect x="2" y="11" width="8" height="2" rx="1" fill="#E97627"/>
+              <rect x="14" y="11" width="8" height="2" rx="1" fill="#E97627"/>
+              <rect x="6" y="6" width="2" height="5" rx="1" fill="#E97627" opacity=".6"/>
+              <rect x="16" y="6" width="2" height="5" rx="1" fill="#E97627" opacity=".6"/>
+              <rect x="6" y="13" width="2" height="5" rx="1" fill="#E97627" opacity=".6"/>
+              <rect x="16" y="13" width="2" height="5" rx="1" fill="#E97627" opacity=".6"/>
+            </svg>
+          </div>
+          <span class="tool-name">Tableau</span>
+        </div>
+        <!-- SQL -->
+        <div class="tool-item">
+          <div class="tool-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="12" cy="6" rx="8" ry="3" fill="#CC2927"/>
+              <path d="M4 6v4c0 1.66 3.58 3 8 3s8-1.34 8-3V6" stroke="#CC2927" stroke-width="1.5" fill="none"/>
+              <path d="M4 10v4c0 1.66 3.58 3 8 3s8-1.34 8-3v-4" stroke="#CC2927" stroke-width="1.5" fill="none"/>
+              <path d="M4 14v4c0 1.66 3.58 3 8 3s8-1.34 8-3v-4" stroke="#CC2927" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <span class="tool-name">SQL</span>
+        </div>
+        <!-- ODK -->
+        <div class="tool-item">
+          <div class="tool-icon">
+            <img src="https://getodk.org/assets/svg/logo.svg" alt="ODK" />
+          </div>
+          <span class="tool-name">ODK</span>
+        </div>
+        <!-- SurveyCTO -->
+        <div class="tool-item">
+          <div class="tool-icon">
+            <img src="https://docs.surveycto.com/assets/img/collect-app-icon.png" alt="SurveyCTO" />
+          </div>
+          <span class="tool-name">SurveyCTO</span>
+        </div>
+        <!-- SPSS -->
+        <div class="tool-item">
+          <div class="tool-icon">
+            <img src="https://statistiekmetspss.nl/wp-content/uploads/2017/02/spss-statistiek.png" alt="SPSS" />
+          </div>
+          <span class="tool-name">SPSS</span>
+        </div>
+        <!-- Looker -->
+        <div class="tool-item">
+          <div class="tool-icon">
+            <img src="https://images.seeklogo.com/logo-png/61/2/looker-studio-logo-png_seeklogo-617989.png" alt="Looker" />
+          </div>
+          <span class="tool-name">Looker</span>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -748,12 +901,8 @@
     A selection of dashboards built for real business problems — click any card to explore details.
   </p>
 
-  <div class="filter-bar fade-in">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="sales">Sales</button>
-    <button class="filter-btn" data-filter="finance">Finance</button>
-    <button class="filter-btn" data-filter="operations">Operations</button>
-    <button class="filter-btn" data-filter="hr">HR</button>
+  <div class="privacy-notice fade-in">
+    🔒 <strong>Data Privacy Notice:</strong> All dashboards displayed below use <strong>anonymised and dummy data</strong>. Client names and any identifying information have been intentionally hidden to protect data confidentiality and comply with client agreements.
   </div>
 
   <div class="dashboard-grid" id="dashboardGrid">
@@ -893,6 +1042,13 @@
   <span>Built with ❤️ for data storytelling</span>
 </footer>
 
+<!-- ──────────────── PRESENTATION OVERLAY ──────────────── -->
+<div id="presentOverlay" class="present-overlay">
+  <div class="present-title" id="presentDashTitle"></div>
+  <button class="present-close" onclick="closePresentOverlay()">✕ Close</button>
+  <div id="presentIframeWrap"></div>
+</div>
+
 <!-- ──────────────── MODAL ──────────────── -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modal">
@@ -931,56 +1087,61 @@ const dashboardsMeta = [
     id: 1,
     category: "operations",
     categoryLabel: "Research & Education",
-    tags: ["Queen Rania Foundation", "Youth", "Education", "Jordan"],
-    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiM2I4MjE5MzItZjFlYi00MzM5LTk1NDUtYjAxODI1YmFlNzBjIiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
+    tags: ["Youth", "Education", "Research", "Jordan"],
+    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNzk1OWI3OTMtMzNkOC00MzJiLTk2ODctM2NhYzNjMWZhNGZmIiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
     icon: "📊",
-    client: "Client",
+    client: "Anonymous",
     year: "2025",
-    tools: "Power BI"
+    tools: "Power BI",
+    canvasW: 1280, canvasH: 720
   },
   {
     id: 2,
     category: "operations",
     categoryLabel: "Operations",
-    tags: ["HFC", "KPIs", "Operations", "Performance"],
-    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNDk0YzZkMDMtZmNlNS00YTU3LTkwNDgtY2JjMGE2NjdiODU2IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9&pageName=bd446f17e701ae847ad3",
+    tags: ["KPIs", "Operations", "Performance", "Health"],
+    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiYTlmZTg3M2MtNmJlOC00ZjAyLTk1OWEtZDA0ZjE5YzJiNDRlIiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
     icon: "🏥",
-    client: "HFC Client",
+    client: "Anonymous",
     year: "2025",
-    tools: "Power BI, DAX"
+    tools: "Power BI, DAX",
+    canvasW: 1280, canvasH: 720
   },
   {
     id: 3,
     category: "operations",
     categoryLabel: "Operations",
-    tags: ["HFC", "Drill-down", "Trends", "Programs"],
-    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNDk0YzZkMDMtZmNlNS00YTU3LTkwNDgtY2JjMGE2NjdiODU2IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9&pageName=db7ab6a7b59ba3a38a2e",
+    tags: ["Drill-down", "Trends", "Programs", "Health"],
+    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNDI4NDVlZWYtMjRmNi00YzUxLWFhOGYtMTBkYWU3NjA0YTc3IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
     icon: "🏥",
-    client: "HFC Client",
+    client: "Anonymous",
     year: "2025",
-    tools: "Power BI, DAX"
+    tools: "Power BI, DAX",
+    canvasW: 1280, canvasH: 720
   },
   {
     id: 4,
     category: "operations",
     categoryLabel: "Health & Program",
     tags: ["Zero Dose", "Immunization", "Coverage", "Public Health"],
-    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiOTA1ZGM4NmMtMDkwZS00ZTU2LWEwM2QtMzBkMWNiY2JkYTM1IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9&pageName=cd2ed6b4e47938ae31a1",
+    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiMjlhNDVmMGUtMDJjZS00NTM5LWI5MzEtM2NmZDlmYjJkNmQ2IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
     icon: "💉",
-    client: "Health Sector",
+    client: "Anonymous",
     year: "2025",
-    tools: "Power BI, DAX, Power Query"
+    tools: "Power BI, DAX, Power Query",
+    canvasW: 1280, canvasH: 720
   },
   {
     id: 5,
     category: "sales",
     categoryLabel: "Sales & Marketing",
     tags: ["ROI", "Conversion", "Attribution", "Campaigns"],
-    embedUrl: null,
+    embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiZTkwZjhjNGUtZGNmYS00NzkzLWFiMWQtYWZhYWYyM2MzZGI4IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
     icon: "📣",
-    client: "E-commerce Client",
+    client: "Anonymous",
     year: "2024",
-    tools: "Power BI, Power Query, API"
+    tools: "Power BI, Power Query, API",
+    canvasW: 1280, canvasH: 720
   },
   {
     id: 6,
@@ -989,9 +1150,10 @@ const dashboardsMeta = [
     tags: ["C-Suite", "KPIs", "Consolidated", "Weekly"],
     embedUrl: null,
     icon: "🏆",
-    client: "Multi-Industry",
+    client: "Anonymous",
     year: "2025",
-    tools: "Power BI, DAX, Composite Model"
+    tools: "Power BI, DAX, Composite Model",
+    canvasW: 1280, canvasH: 720
   }
 ];
 
@@ -1015,25 +1177,24 @@ function renderCards(filter = 'all') {
   const filtered = filter === 'all' ? dashboards : dashboards.filter(d => d.category === filter);
 
   grid.innerHTML = filtered.map(d => `
-    <div class="dashboard-card fade-in" onclick="openModal(${d.id})">
+    <div class="dashboard-card fade-in" onclick="cardClick(${d.id})">
       <div class="card-thumb">
-        ${d.image
-          ? `<img src="${d.image}" alt="${d.title}" loading="lazy" />`
-          : d.embedUrl
-            ? `<div class="thumb-shimmer"></div>
-               <div class="thumb-iframe-wrap">
-                 <iframe src="${d.embedUrl}" scrolling="no" loading="lazy"
-                   title="${d.title} preview"
-                   onload="this.closest('.card-thumb').querySelector('.thumb-shimmer').style.display='none'">
-                 </iframe>
-               </div>`
-            : `<div class="thumb-placeholder">
-                 <div class="thumb-icon">${d.icon}</div>
-                 <div class="thumb-label">Power BI Dashboard</div>
-               </div>`
+        ${d.embedUrl
+          ? `<div class="thumb-iframe-wrap"
+                  data-canvas-w="${d.canvasW || 1280}"
+                  data-canvas-h="${d.canvasH || 720}">
+               <iframe src="${d.embedUrl}" scrolling="no" loading="lazy"
+                 title="${d.title} preview">
+               </iframe>
+             </div>
+             <div class="live-badge">Live</div>`
+          : `<div class="thumb-placeholder">
+               <div class="thumb-icon">${d.icon}</div>
+               <div class="thumb-label">Power BI Dashboard</div>
+             </div>`
         }
         <div class="card-overlay">
-          <button class="overlay-btn">View Dashboard</button>
+          <button class="overlay-btn">${d.embedUrl ? '▶ Present' : 'View Details'}</button>
         </div>
       </div>
       <div class="card-body">
@@ -1049,7 +1210,83 @@ function renderCards(filter = 'all') {
 
   // re-observe for fade-in
   observeFade();
+
+  // Scale live iframes to match actual canvas dimensions
+  requestAnimationFrame(scaleThumbIframes);
 }
+
+// ──────────────────────────────────────────
+//  Scale card iframes to canvas dimensions
+// ──────────────────────────────────────────
+function scaleThumbIframes() {
+  document.querySelectorAll('.thumb-iframe-wrap').forEach(wrap => {
+    const cW = parseInt(wrap.dataset.canvasW) || 1280;
+    const cH = parseInt(wrap.dataset.canvasH) || 720;
+    const containerW = wrap.offsetWidth || 340;
+    const scale = containerW / cW;
+    const iframe = wrap.querySelector('iframe');
+    if (iframe) {
+      iframe.style.width     = cW + 'px';
+      iframe.style.height    = cH + 'px';
+      iframe.style.transform = `scale(${scale})`;
+    }
+  });
+}
+
+// ──────────────────────────────────────────
+//  Card click — present if live, else modal
+// ──────────────────────────────────────────
+function cardClick(id) {
+  const d = dashboards.find(x => x.id === id);
+  if (!d) return;
+  if (d.embedUrl) presentDashboard(id);
+  else openModal(id);
+}
+
+// ──────────────────────────────────────────
+//  Fullscreen Presentation Overlay
+// ──────────────────────────────────────────
+function presentDashboard(id) {
+  const d = dashboards.find(x => x.id === id);
+  if (!d || !d.embedUrl) return;
+
+  const cW  = d.canvasW || 1280;
+  const cH  = d.canvasH || 720;
+  const vw  = window.innerWidth;
+  const scale   = vw / cW;
+  const scaledH = Math.round(cH * scale);
+
+  const src = d.embedUrl + (d.embedUrl.includes('?') ? '&' : '?') + 'chromeless=1';
+
+  const overlay = document.getElementById('presentOverlay');
+  document.getElementById('presentDashTitle').textContent = d.title;
+
+  const wrap = document.getElementById('presentIframeWrap');
+  wrap.style.width  = vw + 'px';
+  wrap.style.height = scaledH + 'px';
+  wrap.innerHTML = `
+    <iframe src="${src}" allowfullscreen title="${d.title}"
+      style="width:${cW}px; height:${cH}px; border:none;
+             transform:scale(${scale}); transform-origin:top left; display:block;">
+    </iframe>`;
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePresentOverlay() {
+  const overlay = document.getElementById('presentOverlay');
+  overlay.classList.remove('open');
+  overlay.scrollTop = 0;
+  document.getElementById('presentIframeWrap').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('presentOverlay').classList.contains('open')) {
+    closePresentOverlay();
+  }
+});
 
 // ──────────────────────────────────────────
 //  Modal
@@ -1087,10 +1324,35 @@ function openModal(id) {
   const preview = document.getElementById('modalPreview');
   if (d.embedUrl) {
     const src = d.embedUrl + (d.embedUrl.includes('?') ? '&' : '?') + 'chromeless=1';
-    preview.innerHTML = `<iframe src="${src}" allowfullscreen title="${d.title}"></iframe>`;
+    const cW = d.canvasW || 1280;
+    const cH = d.canvasH || 720;
+
+    // Estimate modal body width: modal is min(1200px, 96vw) minus 3rem padding
+    const containerW = Math.min(1200, window.innerWidth * 0.96) - 48;
+    const scale      = containerW / cW;
+    const scaledH    = Math.round(cH * scale);
+    const maxH       = Math.round(window.innerHeight * 0.75);
+    const previewH   = Math.max(400, Math.min(scaledH, maxH));
+
+    // Set preview container height and allow scroll if dashboard is taller
+    preview.style.height    = previewH + 'px';
+    preview.style.overflowY = scaledH > maxH ? 'auto' : 'hidden';
+    preview.style.alignItems = 'flex-start';
+
+    preview.innerHTML = `
+      <div style="width:${containerW}px; height:${scaledH}px; flex-shrink:0; overflow:hidden;">
+        <iframe src="${src}" allowfullscreen title="${d.title}"
+          style="width:${cW}px; height:${cH}px; border:none;
+                 transform:scale(${scale}); transform-origin:top left;">
+        </iframe>
+      </div>`;
   } else if (d.image) {
+    preview.style.height = '';
+    preview.style.overflowY = 'hidden';
     preview.innerHTML = `<img src="${d.image}" alt="${d.title}" />`;
   } else {
+    preview.style.height = '';
+    preview.style.overflowY = 'hidden';
     preview.innerHTML = `
       <div class="modal-preview-placeholder">
         <div class="big-icon">${d.icon}</div>
@@ -1215,7 +1477,7 @@ document.getElementById('contactForm').addEventListener('submit', async e => {
 // ──────────────────────────────────────────────────────────────
 //  Init — load titles & summaries from dashboards.json, then render
 // ──────────────────────────────────────────────────────────────
-fetch('dashboards.json')
+fetch('dashboards.json?v=' + Date.now())
   .then(r => r.json())
   .then(textData => {
     dashboards = dashboardsMeta.map(meta => {
@@ -1225,7 +1487,9 @@ fetch('dashboards.json')
         title:    t.title    || '',
         desc:     t.desc     || '',
         longDesc: t.longDesc || '',
-        image:    `images/${t.title}.png`
+        image:    `images/${t.title}.png`,
+        canvasW:  t.canvasW  || meta.canvasW || 1280,
+        canvasH:  t.canvasH  || meta.canvasH || 720
       };
     });
     renderCards();
