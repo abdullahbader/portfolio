@@ -1,50 +1,42 @@
 [
   {
-    "id": 1,
-    "title": "Youth Study",
-    "desc": "Youth empowerment research dashboard — tracking school visits, survey completions, and student demographics.",
-    "longDesc": "A Power BI dashboard presenting findings from a youth agency study conducted in partnership with an international education institution. Covers 100 randomly selected schools, tracking enumerator progress, school visits vs. targets, student demographics, and randomization breakdowns.",
-    "canvasW": 1700,
-    "canvasH": 1280
+    "id": 6,
+    "title": "Executive Summary Report",
+    "desc": "One-page C-suite overview consolidating key metrics from Sales, Operations and HR.",
+    "longDesc": "A single-page board-level dashboard aggregating the top 12 KPIs across four business functions. Designed for weekly leadership reviews — auto-updates each Monday via scheduled refresh.",
+    "canvasW": 1280,
+    "canvasH": 720
   },
   {
     "id": 2,
-    "title": "Health Facility Dashboard",
-    "desc": "Key operational indicators and performance tracking across health facilities.",
+    "title": "HBC Dashboard",
+    "desc": "Key operational indicators and performance tracking across facilities.",
     "longDesc": "A Power BI report providing an overview of core metrics and KPIs relevant to health facility operations, enabling stakeholders to monitor performance at a glance.",
     "canvasW": 1280,
     "canvasH": 1700
   },
   {
     "id": 3,
-    "title": "Child Health Overview Dashboard",
+    "title": "HTTSW Overview Dashboard",
     "desc": "Deeper drill-down into operational and program metrics across health and child welfare programs.",
     "longDesc": "A detailed Power BI report offering a breakdown of program-level data, trends, and supporting metrics to complement the executive overview, designed for operational decision-making.",
     "canvasW": 1920,
     "canvasH": 4100
   },
   {
-    "id": 4,
-    "title": "Vaccination Dashboard",
-    "desc": "Tracking zero-dose children coverage, immunization gaps, and outreach program performance.",
-    "longDesc": "An interactive dashboard monitoring zero-dose children indicators — tracking immunization coverage gaps, geographic distribution, and outreach program effectiveness to support public health decision-making.",
-    "canvasW": 1280,
-    "canvasH": 720
+    "id": 1,
+    "title": "Tch Study",
+    "desc": "Youth empowerment research dashboard — tracking school visits, survey completions, and student demographics.",
+    "longDesc": "A Power BI dashboard presenting findings from a youth agency study conducted in partnership with an international education institution. Covers 100 randomly selected schools, tracking enumerator progress, school visits vs. targets, student demographics, and randomization breakdowns.",
+    "canvasW": 1700,
+    "canvasH": 1280
   },
   {
     "id": 5,
-    "title": "Marketing Campaign Tracker",
+    "title": "Campaign Tracker",
     "desc": "Multi-channel campaign performance: ROI, conversion rates, cost per lead, and channel attribution.",
     "longDesc": "Integrated marketing analytics combining digital ad platforms, social media, email, and CRM data. Features channel attribution modeling, funnel conversion analysis, and campaign ROI scorecard.",
     "canvasW": 2790,
     "canvasH": 1400
-  },
-  {
-    "id": 6,
-    "title": "Executive Summary Report",
-    "desc": "One-page C-suite overview consolidating key metrics from Sales, Finance, Operations and HR.",
-    "longDesc": "A single-page board-level dashboard aggregating the top 12 KPIs across four business functions. Designed for weekly leadership reviews — auto-updates each Monday via scheduled refresh.",
-    "canvasW": 1920,
-    "canvasH": 4100
   }
 ]
