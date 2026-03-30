@@ -1174,7 +1174,7 @@ function renderCards(filter = 'all') {
     <div class="dashboard-card fade-in" onclick="cardClick(${d.id})">
       <div class="card-thumb">
         ${d.image
-          ? `<img src="${d.image}" alt="${d.title}" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+          ? `<img src="${d.image}" alt="${d.title}" style="width:100%;height:100%;object-fit:contain;object-position:top center;display:block;background:#1E1E1E;">
              <div class="live-badge">Live</div>`
           : d.embedUrl
             ? `<div class="thumb-iframe-wrap"
