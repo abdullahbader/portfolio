@@ -1172,10 +1172,12 @@ function renderCards(filter = 'all') {
         ${d.embedUrl
           ? `<div class="thumb-iframe-wrap"
                   data-canvas-w="${d.canvasW || 1280}"
-                  data-canvas-h="${d.canvasH || 720}">
-               <iframe src="${d.embedUrl}" scrolling="no" loading="lazy"
-                 title="${d.title} preview">
-               </iframe>
+                  data-canvas-h="${d.canvasH || 720}"
+                  data-src="${d.embedUrl}">
+               <div class="thumb-placeholder">
+                 <div class="thumb-icon">${d.icon}</div>
+                 <div class="thumb-label">Power BI Dashboard</div>
+               </div>
              </div>
              <div class="live-badge">Live</div>`
           : `<div class="thumb-placeholder">
@@ -1201,8 +1203,35 @@ function renderCards(filter = 'all') {
   // re-observe for fade-in
   observeFade();
 
-  // Scale live iframes to match actual canvas dimensions
-  requestAnimationFrame(scaleThumbIframes);
+  // Lazy-load iframes as cards scroll into view
+  lazyLoadThumbIframes();
+}
+
+// ──────────────────────────────────────────
+//  Lazy-load iframes when cards enter viewport
+// ──────────────────────────────────────────
+function lazyLoadThumbIframes() {
+  const wraps = document.querySelectorAll('.thumb-iframe-wrap[data-src]');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const wrap = entry.target;
+      const src = wrap.dataset.src;
+      if (!src || wrap.querySelector('iframe')) return;
+      const cW = parseInt(wrap.dataset.canvasW) || 1280;
+      const cH = parseInt(wrap.dataset.canvasH) || 720;
+      const containerW = wrap.offsetWidth || 340;
+      const scale = containerW / cW;
+      const iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.scrolling = 'no';
+      iframe.title = 'Dashboard preview';
+      iframe.style.cssText = `width:${cW}px;height:${cH}px;border:none;pointer-events:none;transform:scale(${scale});transform-origin:top left;position:absolute;top:0;left:0;`;
+      wrap.appendChild(iframe);
+      obs.unobserve(wrap);
+    });
+  }, { rootMargin: '200px' });
+  wraps.forEach(w => obs.observe(w));
 }
 
 // ──────────────────────────────────────────
