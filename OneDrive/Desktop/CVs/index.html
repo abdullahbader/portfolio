@@ -1091,6 +1091,7 @@ const dashboardsMeta = [
     categoryLabel: "Sales & Marketing",
     tags: ["ROI", "Conversion", "Attribution", "Campaigns"],
     embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiZTkwZjhjNGUtZGNmYS00NzkzLWFiMWQtYWZhYWYyM2MzZGI4IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
+    image: "images/campaign-tracker.png",
     icon: "📣",
     client: "Anonymous",
     year: "2024",
@@ -1103,6 +1104,7 @@ const dashboardsMeta = [
     categoryLabel: "Operations",
     tags: ["KPIs", "Operations", "Performance", "Health"],
     embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiYTlmZTg3M2MtNmJlOC00ZjAyLTk1OWEtZDA0ZjE5YzJiNDRlIiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
+    image: "images/health-kpis.png",
     icon: "🏥",
     client: "Anonymous",
     year: "2025",
@@ -1115,6 +1117,7 @@ const dashboardsMeta = [
     categoryLabel: "Operations",
     tags: ["Drill-down", "Trends", "Programs", "Health"],
     embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiNDI4NDVlZWYtMjRmNi00YzUxLWFhOGYtMTBkYWU3NjA0YTc3IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
+    image: "images/health-programs.png",
     icon: "🏥",
     client: "Anonymous",
     year: "2025",
@@ -1139,6 +1142,7 @@ const dashboardsMeta = [
     categoryLabel: "Finance",
     tags: ["C-Suite", "KPIs", "Consolidated", "Weekly"],
     embedUrl: "https://app.powerbi.com/view?r=eyJrIjoiMjlhNDVmMGUtMDJjZS00NTM5LWI5MzEtM2NmZDlmYjJkNmQ2IiwidCI6ImMzMDE2ZDZkLTI2ZjMtNGUzYi05YTlkLTVkNzdkODcxZDg2NyIsImMiOjl9",
+    image: "images/finance-dashboard.png",
     icon: "🏆",
     client: "Anonymous",
     year: "2025",
@@ -1169,21 +1173,24 @@ function renderCards(filter = 'all') {
   grid.innerHTML = filtered.map(d => `
     <div class="dashboard-card fade-in" onclick="cardClick(${d.id})">
       <div class="card-thumb">
-        ${d.embedUrl
-          ? `<div class="thumb-iframe-wrap"
-                  data-canvas-w="${d.canvasW || 1280}"
-                  data-canvas-h="${d.canvasH || 720}"
-                  data-src="${d.embedUrl}">
-               <div class="thumb-placeholder">
+        ${d.image
+          ? `<img src="${d.image}" alt="${d.title}" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+             <div class="live-badge">Live</div>`
+          : d.embedUrl
+            ? `<div class="thumb-iframe-wrap"
+                    data-canvas-w="${d.canvasW || 1280}"
+                    data-canvas-h="${d.canvasH || 720}"
+                    data-src="${d.embedUrl}">
+                 <div class="thumb-placeholder">
+                   <div class="thumb-icon">${d.icon}</div>
+                   <div class="thumb-label">Power BI Dashboard</div>
+                 </div>
+               </div>
+               <div class="live-badge">Live</div>`
+            : `<div class="thumb-placeholder">
                  <div class="thumb-icon">${d.icon}</div>
                  <div class="thumb-label">Power BI Dashboard</div>
-               </div>
-             </div>
-             <div class="live-badge">Live</div>`
-          : `<div class="thumb-placeholder">
-               <div class="thumb-icon">${d.icon}</div>
-               <div class="thumb-label">Power BI Dashboard</div>
-             </div>`
+               </div>`
         }
         <div class="card-overlay">
           <button class="overlay-btn">${d.embedUrl ? '▶ Present' : 'View Details'}</button>
@@ -1506,7 +1513,7 @@ fetch('dashboards.json?v=' + Date.now())
         title:    t.title    || '',
         desc:     t.desc     || '',
         longDesc: t.longDesc || '',
-        image:    `images/${t.title}.png`,
+        image:    meta.image || null,
         canvasW:  t.canvasW  || meta.canvasW || 1280,
         canvasH:  t.canvasH  || meta.canvasH || 720
       };
